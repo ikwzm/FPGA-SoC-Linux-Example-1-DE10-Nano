@@ -133,7 +133,7 @@ shell$ cd FPGA-SoC-Linux-Example-1-DE10-Nano
 shell$ git submodule update --init --recursive
 ```
 
-### Build DE0_NANO_SOC.rbf
+### Build DE10_NANO.rbf
 
 Run SoC EDS Command Shell
 
@@ -142,9 +142,9 @@ shell$ cd project
 shell$ make rbf
 ```
 
-### Copy DE0_NANO_SOC.rbf to pump_axi4.rbf
+### Copy DE10_NANO.rbf to pump_axi4.rbf
 
 ```console
 shell$ cd project
-shell$ cp DE0_NANO_SOC.rbf ../pump_axi4.rbf
+shell$ cp DE10_NANO.rbf ../pump_axi4.rbf
 ```
