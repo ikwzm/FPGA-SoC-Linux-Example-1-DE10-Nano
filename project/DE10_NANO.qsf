@@ -6,14 +6,14 @@ set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEBA6U23I7
 set_global_assignment -name TOP_LEVEL_ENTITY "DE10_NANO"
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "16.0.2"
-set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:05:19 APRIL 28,2018"
 set_global_assignment -name DEVICE_FILTER_PACKAGE UFBGA
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 672
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 7
 set_global_assignment -name SDC_FILE DE10_NANO.SDC
 set_global_assignment -name QIP_FILE ip/pipework_altera.qip
-set_global_assignment -name QSYS_FILE soc_system.qsys
+set_global_assignment -name QIP_FILE soc_system/synthesis/soc_system.qip
 set_global_assignment -name VERILOG_FILE DE10_NANO.v
 
 
