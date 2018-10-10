@@ -11,10 +11,6 @@ set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:05:19 APRIL 28,2018"
 set_global_assignment -name DEVICE_FILTER_PACKAGE UFBGA
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 672
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 7
-set_global_assignment -name SDC_FILE DE10_NANO.SDC
-set_global_assignment -name QIP_FILE ip/pipework_altera.qip
-set_global_assignment -name QIP_FILE soc_system/synthesis/soc_system.qip
-set_global_assignment -name VERILOG_FILE DE10_NANO.v
 
 
 #============================================================
@@ -450,3 +446,16 @@ set_global_assignment -name USE_DLL_FREQUENCY_FOR_DQS_DELAY_CHAIN ON
 set_global_assignment -name UNIPHY_SEQUENCER_DQS_CONFIG_ENABLE ON
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name ECO_REGENERATE_REPORT ON
+set_global_assignment -name SDC_FILE DE10_NANO.SDC
+set_global_assignment -name VERILOG_FILE DE10_NANO.v
+set_global_assignment -name QSYS_FILE soc_system.qsys
+set_global_assignment -name QIP_FILE ip/pipework_altera.qip
+set_global_assignment -name PROJECT_IP_REGENERATION_POLICY ALWAYS_REGENERATE_IP
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP "-40"
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 100
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -160,7 +160,7 @@ $(QSYS_SOPCINFO) $(QSYS_QIP): $(QSYS_STAMP)
 endif
 
 $(QSYS_STAMP): $(QSYS_DEPS)
-	$(SET_QSYS_GENERATE_ENV) qsys-generate $(QSYS_FILE) --synthesis=VHDL $(QSYS_GENERATE_ARGS)
+	# $(SET_QSYS_GENERATE_ENV) qsys-generate $(QSYS_FILE) --synthesis=VHDL $(QSYS_GENERATE_ARGS)
 	$(stamp_target)
 
 HELP_TARGETS += qsys_edit
