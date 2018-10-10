@@ -30,8 +30,8 @@ shell# rake install
 dtbocfg.rb --install uio_irq_sample --dts uio_irq_sample.dts
 cp pump_axi4.rbf /lib/firmware/pump_axi4.rbf
 dtbocfg.rb --install uio_irq_sample --dts uio_irq_sample.dts
-/config/device-tree/overlays/uio_irq_sample/dtbo: Warning (unit_address_vs_reg): [25851.013494] fpga_manager fpga0: writing pump_axi4.rbf to Altera SOCFPGA FPGA Manager
-Node /uio-irq-test@0 has a unit name, but no reg property
+/config/device-tree/overlays/uio_irq_sample/dtbo: Warning (unit_address_vs_reg): Node /uio-irq-test@0 has a unit name, but no reg property
+[25851.013494] fpga_manager fpga0: writing pump_axi4.rbf to Altera SOCFPGA FPGA Manager
 [25851.281944] udmabuf soc:fpga-region0:pump-udmabuf4: driver probe start.
 [25851.302254] udmabuf udmabuf4: driver installed
 [25851.306800] udmabuf udmabuf4: major number   = 244
@@ -124,7 +124,7 @@ dtbocfg.rb --remove uio_irq_sample
 
 ### Requirement
 
-* Altera 15.1.0.185 Lite Edition 
+* Intel Quartus Prime 18.1.0 Lite Edition 
 
 ### Download FPGA-SoC-Linux-Example-1-Base
 
