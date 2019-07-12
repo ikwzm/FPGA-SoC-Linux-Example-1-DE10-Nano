@@ -1,19 +1,23 @@
-/dts-v1/;
+/dts-v1/;/plugin/;
 / {
-	uio-irq-test@0 {
+	fragment@0 {
 		target-path = "/soc/fpga-region0";
+		__overlay__ {
+			firmware-name = "pump_axi4.rbf";
+		};
+	};
+	fragment@1 {
+		target-path = "/soc/amba";
 		#address-cells = <0x1>;
 		#size-cells = <0x1>;
-		
 		__overlay__ {
 			#address-cells = <0x1>;
 			#size-cells = <0x1>;
 
-			firmware-name = "pump_axi4.rbf";
-			
 			pump-uio@43c10000 {
 				compatible = "generic-uio";
 				reg = <0xff202000 0x1000>;
+				interrupt-parent = <&intc>;
 				interrupts = <0x0 0x28 0x4>;
 	                };
 
