@@ -1,4 +1,4 @@
-PGA-SoC-Linux-Example-1-DE10-Nano
+FPGA-SoC-Linux-Example-1-DE10-Nano
 =====================================
 
 FPGA-SoC-Linux example(1) binary and project and test code for DE10-Nano
