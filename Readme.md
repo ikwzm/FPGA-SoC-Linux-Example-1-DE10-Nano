@@ -27,27 +27,28 @@ shell$ cd FPGA-SoC-Linux-Example-1-DE10-Nano
 
 ```console
 shell# rake install
-dtbocfg.rb --install uio_irq_sample --dts uio_irq_sample.dts
 cp pump_axi4.rbf /lib/firmware/pump_axi4.rbf
 dtbocfg.rb --install uio_irq_sample --dts uio_irq_sample.dts
-/config/device-tree/overlays/uio_irq_sample/dtbo: Warning (unit_address_vs_reg): Node /uio-irq-test@0 has a unit name, but no reg property
-[25851.013494] fpga_manager fpga0: writing pump_axi4.rbf to Altera SOCFPGA FPGA Manager
-[25851.281944] udmabuf soc:fpga-region0:pump-udmabuf4: driver probe start.
-[25851.302254] udmabuf udmabuf4: driver installed
-[25851.306800] udmabuf udmabuf4: major number   = 244
-[25851.311572] udmabuf udmabuf4: minor number   = 0
-[25851.316173] udmabuf udmabuf4: phys address   = 0x3f100000
-[25851.321618] udmabuf udmabuf4: buffer size    = 4194304
-[25851.326793] udmabuf udmabuf4: dma coherent   = 0
-[25851.331397] udmabuf soc:fpga-region0:pump-udmabuf4: driver installed.
-[25851.338417] udmabuf soc:fpga-region0:pump-udmabuf5: driver probe start.
-[25851.358070] udmabuf udmabuf5: driver installed
-[25851.362507] udmabuf udmabuf5: major number   = 244
-[25851.367319] udmabuf udmabuf5: minor number   = 1
-[25851.371921] udmabuf udmabuf5: phys address   = 0x3f500000
-[25851.377353] udmabuf udmabuf5: buffer size    = 4194304
-[25851.382473] udmabuf udmabuf5: dma coherent   = 0
-[25851.387113] udmabuf soc:fpga-region0:pump-udmabuf5: driver installed.
+<stdin>:17.13-22.20: Warning (unit_address_vs_reg): /fragment@1/__overlay__/pump-uio: node has a reg or ranges property, but no unit name
+<stdin>:9.13-36.5: Warning (avoid_unnecessary_addr_size): /fragment@1: unnecessary #address-cells/#size-cells without "ranges" or child "reg" property
+[  830.493939] fpga_manager fpga0: writing pump_axi4.rbf to Altera SOCFPGA FPGA Manager
+[  830.697564] OF: overlay: WARNING: memory leak will occur if overlay removed, property: /soc/fpga-region0/firmware-name
+[  830.731745] u-dma-buf udmabuf4: driver version = 3.0.1
+[  830.736879] u-dma-buf udmabuf4: major number   = 245
+[  830.741900] u-dma-buf udmabuf4: minor number   = 0
+[  830.746680] u-dma-buf udmabuf4: phys address   = 0x3f100000
+[  830.752287] u-dma-buf udmabuf4: buffer size    = 4194304
+[  830.757628] u-dma-buf udmabuf4: dma device     = soc:amba:pump-udmabuf4
+[  830.764218] u-dma-buf udmabuf4: dma coherent   = 1
+[  830.769029] u-dma-buf soc:amba:pump-udmabuf4: driver installed.
+[  830.792116] u-dma-buf udmabuf5: driver version = 3.0.1
+[  830.797393] u-dma-buf udmabuf5: major number   = 245
+[  830.802342] u-dma-buf udmabuf5: minor number   = 1
+[  830.807115] u-dma-buf udmabuf5: phys address   = 0x3f500000
+[  830.812722] u-dma-buf udmabuf5: buffer size    = 4194304
+[  830.818078] u-dma-buf udmabuf5: dma device     = soc:amba:pump-udmabuf5
+[  830.824669] u-dma-buf udmabuf5: dma coherent   = 1
+[  830.829497] u-dma-buf soc:amba:pump-udmabuf5: driver installed.
 ```
 
 ## Run sample1 or sample2

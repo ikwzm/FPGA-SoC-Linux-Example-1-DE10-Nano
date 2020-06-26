@@ -3,6 +3,8 @@
 
 #include        <stdio.h>
 #include        <stdint.h>
+#include        <dirent.h>
+#include        <string.h>
 #include        <unistd.h>
 #include        <fcntl.h>
 #include        <string.h>
@@ -131,6 +133,7 @@ static inline void pump_clear_status(void* regs)
 
 struct udmabuf {
     char           name[128];
+    char           sys_class_path[1024];
     int            file;
     unsigned char* buf;
     unsigned int   buf_size;
@@ -141,6 +144,7 @@ struct udmabuf {
 
 int udmabuf_open(struct udmabuf* udmabuf, const char* name)
 {
+    char*          sys_class_path_list[] = {"/sys/class/u-dma-buf", "/sys/class/udmabuf"};
     char           file_name[1024];
     int            fd;
     unsigned char  attr[1024];
@@ -148,7 +152,26 @@ int udmabuf_open(struct udmabuf* udmabuf, const char* name)
     strcpy(udmabuf->name, name);
     udmabuf->file = -1;
 
-    sprintf(file_name, "/sys/class/udmabuf/%s/phys_addr", name);
+    {
+        int i;
+        int found = 0;
+        for (i = 0; i < sizeof(sys_class_path_list); i++) {
+            DIR*   dp;
+            sprintf(file_name, "%s/%s", sys_class_path_list[i], name);
+            dp = opendir(file_name);
+            if (dp != NULL) {
+                strncpy(udmabuf->sys_class_path, file_name, 1024);
+                found = 1;
+                break;
+            }
+        }
+        if (found == 0) {
+            printf("Can not found sys class\n");
+            return (-1);
+        }
+    }
+
+    sprintf(file_name, "%s/phys_addr", udmabuf->sys_class_path);
     if ((fd  = open(file_name, O_RDONLY)) == -1) {
         printf("Can not open %s\n", file_name);
         return (-1);
@@ -157,7 +180,7 @@ int udmabuf_open(struct udmabuf* udmabuf, const char* name)
     sscanf(attr, "%x", &udmabuf->phys_addr);
     close(fd);
 
-    sprintf(file_name, "/sys/class/udmabuf/%s/size", name);
+    sprintf(file_name, "%s/size", udmabuf->sys_class_path);
     if ((fd  = open(file_name, O_RDONLY)) == -1) {
         printf("Can not open %s\n", file_name);
         return (-1);
@@ -201,5 +224,46 @@ void print_diff_time(struct timeval start_time, struct timeval end_time)
     }
     printf("time = %ld.%06ld sec\n", diff_time.tv_sec, diff_time.tv_usec);
 }
+
+int uio_open(char* name)
+{
+    DIR*   dp;
+    char   temp_buf[1024];
+    dp = opendir("/sys/class/uio/");
+    if (dp != NULL) {
+        struct dirent* entry;
+        do {
+            entry = readdir(dp);
+            if (entry != NULL) {
+                FILE*   fd;
+                sprintf(temp_buf, "/sys/class/uio/%s/name", entry->d_name);
+                // printf("scan %s\n", temp_buf);
+                if ((fd = fopen(temp_buf, "r")) != NULL) {
+                    int     found = 0;
+                    int     i;
+                    if (fgets(temp_buf, sizeof(temp_buf), fd) != NULL) {
+                        // printf("read => %s\n", temp_buf);
+                        for(i = 0; i < sizeof(temp_buf); i++) {
+                            if ((name[i] == '\0') && ((temp_buf[i] == '\0' || temp_buf[i] == '\n'))) {
+                                found = 1;
+                                break;
+                            }
+                            if (name[i] != temp_buf[i]) 
+                                break;
+                        }
+                    }
+                    fclose(fd);
+                    if (found == 1) {
+                        sprintf(temp_buf, "/dev/%s", entry->d_name);
+                        // printf("found %s in %s\n", name, temp_buf);
+                        return open(temp_buf, O_RDWR);
+                    }
+                }
+            }
+        } while(entry != NULL);
+    }
+    return -1;
+}
+
 
 #endif
